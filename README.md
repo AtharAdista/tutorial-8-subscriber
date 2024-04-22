@@ -16,3 +16,8 @@
     - `localhost:5672` merupakan hostname dan portnya. `localhost` adalah nama host (dalam kasus ini adalah mesin lokal). `5672` adalah port yang digunakan. Dalam konteks tutorial ini, `localhost:5672` merupakan alamat dan port sever RabbitMQ. `localhost` menunjukkan bawah server RabbitMQ berjalan di mesin lokal. `5672` adalah port default yang digunakan oleh RabbitMQ untuk menerima koneksi.
 
     Jadi intinya `guest:guest@localhost:5672` adalah cara untuk melakukan otentikasi dan terhubung ke server RabbitMQ yang berjalan di mesin lokal dengan memakai username guest dan kata sandi guest.
+
+### Spikes di RabbitMQ ketika simulating slow subscriber
+![alt text](images/spikes_RabbitMQ_simulating_slow.png)
+
+pada grafik terlihat bahwa sempat terdapat 10 queue message dalam satu waktu, hal ini dikarenakan subscriber sudah ditambahkan sebuah thread::sleep yang membuat kecepatan subscriber untuk mengambil message jauh lebih lambat daripada kecepatan publisher dalam mempublish message, sehingga terjadi penumpukan message di queue.
